@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
@@ -125,6 +126,11 @@ public class UserServiceImplUnitTestNoDB
     @Test
     public void findUserById()
     {
+        Mockito.when(userRepository.findById(10L))
+            .thenReturn(Optional.of(userList.get(0)));
+        assertEquals("admin",
+            userService.findUserById(10).getUsername());
+        System.out.println(userService.findUserById(10).getUsername());
     }
 
     @Test
